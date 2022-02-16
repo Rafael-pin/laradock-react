@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Company extends Model
+class Address extends Model
 {
-
-    // use HasFactory;
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -16,8 +15,8 @@ class Company extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'CNPJ',
+        'number',
+        'CEP',
     ];
 
     /**
@@ -36,14 +35,8 @@ class Company extends Model
     protected $casts = [
     ];
 
-    public function users()
+    public function company()
     {
-        return $this->hasMany(Users::class);
+        return $this->belongsTo(Company::class);
     }
-
-    public function address()
-    {
-        return $this->hasOne(Users::class);
-    }
-
 }

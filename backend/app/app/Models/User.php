@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-// use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class User extends Model
 {
-    // use HasFactory;
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -35,8 +36,7 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'birthdate' => 'datetime',
-        'email' => 'email'
+        'birthdate' => 'datetime'
     ];
 
     public function company()
