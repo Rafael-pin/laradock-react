@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-// use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class Address extends Model
 {
     // use HasFactory;
 
@@ -15,10 +16,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
-        'phone',
-        'birthdate',
-        'city',
+        'CNPJ',
     ];
 
     /**
@@ -35,12 +33,10 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'birthdate' => 'datetime',
-        'email' => 'email'
     ];
 
-    public function company()
+    public function comments()
     {
-        return $this->belongsTo(Company::class);
+        return $this->hasMany(Users::class);
     }
 }
