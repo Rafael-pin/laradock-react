@@ -35,6 +35,17 @@ class CompanyController extends Controller
         return $company;
 
     }
+
+    public function delete(Request $request)
+    {
+        $company = Company::findOrFail($request->route('id'));
+ 
+        if (!$company) {
+            throw new \Exception('Not found', -404);
+        }
+
+        return $company->delete() ? 'Company deleated' : 'Error while deleating company';
+    }
    
     public function store(StoreCompany $request)
     {

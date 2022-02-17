@@ -36,6 +36,17 @@ class UserController extends Controller
 
     }
 
+    public function delete(Request $request)
+    {
+        $user = User::findOrFail($request->route('id'));
+ 
+        if (!$user) {
+            throw new \Exception('Not found', -404);
+        }
+
+        return $user->delete() ? 'User deleated' : 'Error while deleating user';
+    }
+
     public function store(StoreUser $request)
     {
         try{        

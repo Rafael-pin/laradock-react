@@ -18,18 +18,21 @@ Route::prefix('user')->group(function () {
     Route::get('/', 'App\Http\Controllers\UserController@index')->name('user.index');
     Route::get('/{id}', 'App\Http\Controllers\UserController@get')->name('user.get');
     Route::post('/new', 'App\Http\Controllers\UserController@store')->name('user.store');
+    Route::delete('/delete/{id}', 'App\Http\Controllers\UserController@delete')->name('user.delete');
 });
 
 Route::prefix('address')->group(function () {
     Route::get('/', 'App\Http\Controllers\AddressController@index')->name('address.index');
     Route::get('/{id}', 'App\Http\Controllers\AddressController@get')->name('address.get');
     Route::post('/new', 'App\Http\Controllers\AddressController@store')->name('address.store');
+    Route::delete('/delete/{id}', 'App\Http\Controllers\AddressController@delete')->name('address.delete');
 });
 
 Route::prefix('company')->group(function () {
     Route::get('/', 'App\Http\Controllers\CompanyController@index')->name('company.index');
     Route::get('/{id}', 'App\Http\Controllers\CompanyController@get')->name('company.get');
     Route::post('/new', 'App\Http\Controllers\CompanyController@store')->name('company.store');
+    Route::delete('/delete/{id}', 'App\Http\Controllers\CompanyController@delete')->name('company.delete');
 });
 
 

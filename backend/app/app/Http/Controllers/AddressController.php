@@ -49,4 +49,15 @@ class AddressController extends Controller
     
     }
 
+    public function delete(Request $request)
+    {
+        $address = Address::findOrFail($request->route('id'));
+ 
+        if (!$address) {
+            throw new \Exception('Not found', -404);
+        }
+
+        return $address->delete() ? 'address deleated' : 'Error while deleating address';
+    }
+
 }
