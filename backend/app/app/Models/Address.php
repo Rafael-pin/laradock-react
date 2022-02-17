@@ -9,13 +9,18 @@ class Address extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'number',
         'cep',
     ];
 
     protected $hidden = [
-        'id'
+        'id',
+        'created_at',
+        'updated_at',
+        'removed_at'
     ];
 
     public function create($fields)
@@ -24,6 +29,11 @@ class Address extends Model
             'number' => $fields['number'],
             'cep' => $fields['cep'],
         ]);
+    }
+
+    public function index() 
+    {
+        return $this->all();
     }
 
     public function company()

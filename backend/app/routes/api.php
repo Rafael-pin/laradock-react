@@ -20,8 +20,11 @@ Route::prefix('user')->group(function () {
     Route::post('/new', 'App\Http\Controllers\UserController@store')->name('user.store');
 });
 
-
-Route::post('/new_address', 'App\Http\Controllers\AddressController@store')->name('address.store');
+Route::prefix('address')->group(function () {
+    Route::get('/', 'App\Http\Controllers\AddressController@index')->name('address.index');
+    Route::get('/{id}', 'App\Http\Controllers\AddressController@get')->name('address.get');
+    Route::post('/new', 'App\Http\Controllers\AddressController@store')->name('address.store');
+});
 
 Route::post('/new_company', 'App\Http\Controllers\CompanyController@store')->name('company.store');
 

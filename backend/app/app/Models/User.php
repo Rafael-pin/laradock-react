@@ -19,7 +19,11 @@ class User extends Model
     ];
 
     protected $hidden = [
-        'id'
+        'id',
+        'created_at',
+        'updated_at',
+        'removed_at',
+        'company_id'
     ];
 
     protected $casts = [

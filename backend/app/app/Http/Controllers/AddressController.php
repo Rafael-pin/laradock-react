@@ -12,6 +12,22 @@ class AddressController extends Controller
 {
     private $address;
 
+    public function index()
+    {
+        return new AddressResourceCollection($this->address->index());
+    }
+
+    public function get(Request $request)
+    {
+        $address = Address::findOrFail($request->route('id'));
+ 
+        if (!$address) {
+            throw new \Exception('Not found', -404);
+        }
+
+        return $address;
+    }
+
     public function __construct(Address $address)
     {
         $this->address = $address;
