@@ -26,6 +26,10 @@ Route::prefix('address')->group(function () {
     Route::post('/new', 'App\Http\Controllers\AddressController@store')->name('address.store');
 });
 
-Route::post('/new_company', 'App\Http\Controllers\CompanyController@store')->name('company.store');
+Route::prefix('company')->group(function () {
+    Route::get('/', 'App\Http\Controllers\CompanyController@index')->name('company.index');
+    Route::get('/{id}', 'App\Http\Controllers\CompanyController@get')->name('company.get');
+    Route::post('/new', 'App\Http\Controllers\CompanyController@store')->name('company.store');
+});
 
 

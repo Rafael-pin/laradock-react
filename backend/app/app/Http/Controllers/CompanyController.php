@@ -18,6 +18,23 @@ class CompanyController extends Controller
     {
         $this->company = $company;
     }
+
+    public function index()
+    {
+        return new CompanyResourceCollection($this->company->index());
+    }
+
+    public function get(Request $request)
+    {
+        $company = Company::findOrFail($request->route('id'));
+ 
+        if (!$company) {
+            throw new \Exception('Not found', -404);
+        }
+
+        return $company;
+
+    }
    
     public function store(StoreCompany $request)
     {

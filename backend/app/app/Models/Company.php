@@ -33,6 +33,11 @@ class Company extends Model
         ]);
     }
 
+    public function index() 
+    {
+        return $this->all();
+    }
+
     public function users()
     {
         return $this->hasMany(Users::class);
