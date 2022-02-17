@@ -8,8 +8,6 @@ use App\Http\Requests\Address\StoreAddress;
 use App\Services\ResponseService;
 use App\Transformers\Address\AddressResource;
 use App\Transformers\Address\AddressResourceCollection;
-
-use App\Transformers\User\UserResource;
 class AddressController extends Controller
 {
     private $address;
@@ -25,13 +23,15 @@ class AddressController extends Controller
 
         $address = $this->address->create($request->all());
 
-    }catch(\Throwable $e) {
+        }catch(\Throwable $e) {
 
-        return ResponseService::exception('address.store', null, $e);
+            return ResponseService::exception('address.store', null, $e);
 
+        }
+
+        return new AddressResource($address, array('type' => 'store','route' => 'address.store'));
+    
     }
-    return new AddressResource($address, array('type' => 'store','route' => 'address.store'));
-}
 
     /**
      * Display the specified resource.
