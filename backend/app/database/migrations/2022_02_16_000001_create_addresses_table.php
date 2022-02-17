@@ -17,6 +17,7 @@ class CreateAddressesTable extends Migration
             $table->id();
             $table->string('cep')->required();
             $table->string('number')->required();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

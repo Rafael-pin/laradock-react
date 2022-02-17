@@ -18,7 +18,8 @@ class CreateCompaniesTable extends Migration
             $table->string('name');
             $table->string('cnpj')->unique();
             $table->unsignedBigInteger('address_id');
-            $table->foreign('address_id')->references('id')->on('addresses');
+            $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
