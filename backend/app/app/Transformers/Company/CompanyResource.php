@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Transformers\User;
+namespace App\Transformers\Company;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Services\ResponseService;
 
-class UserResource extends JsonResource
+class CompanyResource extends JsonResource
 {
 
     private $config;
@@ -21,9 +21,8 @@ class UserResource extends JsonResource
     {
         return [
             'name' => $this->name,
-            'email' => $this->email,
-            'phone' => $this->phone,
-            'city' => $this->city,
+            'cnpj' => $this->cnpj,
+            'address_id' => $this->address_id
         ];
     }
 

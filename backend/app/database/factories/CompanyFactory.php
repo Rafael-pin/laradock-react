@@ -15,7 +15,7 @@ class CompanyFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'CNPJ' => $this->faker->numerify('##.###.###/####-##'),
+            'cnpj' => $this->faker->numerify('##.###.###/####-##'),
             'address_id' => rand(1,10)
         ];
     }

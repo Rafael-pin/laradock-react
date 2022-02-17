@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Transformers\User;
+namespace App\Transformers\Company;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 use App\Services\ResponseService;
 
-class UserResourceCollection extends ResourceCollection
+class CompanyResourceCollection extends ResourceCollection
 {
 
   public function toArray($request)
@@ -19,7 +19,7 @@ class UserResourceCollection extends ResourceCollection
     return [
       'status' => true,
       'msg'    => 'Listing data',
-      'url'    => route('user.index')
+      'url'    => route('company.index')
     ];
   }
 

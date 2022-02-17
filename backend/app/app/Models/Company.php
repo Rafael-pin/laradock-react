@@ -10,31 +10,24 @@ class Company extends Model
 
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
-        'CNPJ',
+        'cnpj',
+        'address_id',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
+        'id'
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-    ];
+    public function create($fields)
+    {
+        return parent::create([
+            'name' => $fields['name'],
+            'cnpj' => $fields['cnpj'],
+            'address_id' => $fields['address_id'],
+        ]);
+    }
 
     public function users()
     {

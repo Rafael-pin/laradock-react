@@ -17,3 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::post('/new_user', 'App\Http\Controllers\UserController@store')->name('user.store');
 
 Route::post('/new_address', 'App\Http\Controllers\AddressController@store')->name('address.store');
+
+Route::post('/new_company', 'App\Http\Controllers\CompanyController@store')->name('company.store');
