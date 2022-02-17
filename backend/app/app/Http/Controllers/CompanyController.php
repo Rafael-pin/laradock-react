@@ -21,15 +21,15 @@ class CompanyController extends Controller
    
     public function store(StoreCompany $request)
     {
-        // try{        
+        try{        
 
             $company = $this->company->create($request->all());
 
-        // }catch(\Throwable $e) {
+        }catch(\Throwable $e) {
 
-            // return ResponseService::exception('company.store', null, $e);
+            return ResponseService::exception('company.store', null, $e);
 
-        // }
+        }
 
         return new CompanyResource($company, array('type' => 'store','route' => 'company.store'));
     

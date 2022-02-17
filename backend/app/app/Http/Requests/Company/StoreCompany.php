@@ -11,11 +11,6 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 class StoreCompany extends FormRequest
 {
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
@@ -25,12 +20,6 @@ class StoreCompany extends FormRequest
         ];
     }
 
-    /**
-     * Configure the validator instance.
-     *
-     * @param  \Illuminate\Validation\Validator  $validator
-     * @return void
-     */
     public function withValidator($validator)
     {
 
