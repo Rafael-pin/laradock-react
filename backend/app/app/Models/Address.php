@@ -23,7 +23,7 @@ class Address extends Model
         'id',
         'created_at',
         'updated_at',
-        'removed_at'
+        'deleted_at',
     ];
 
     public function create($fields)

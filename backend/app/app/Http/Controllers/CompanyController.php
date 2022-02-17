@@ -36,15 +36,37 @@ class CompanyController extends Controller
 
     }
 
-    public function delete(Request $request)
+    public function update(Request $request)
     {
-        $company = Company::findOrFail($request->route('id'));
- 
-        if (!$company) {
-            throw new \Exception('Not found', -404);
+        try { 
+
+            $company = $this->get($request);
+
+            $company->update($request->all());
+
+        } catch(\Throwable $e) {
+
+            return ResponseService::exception('CompanyController.update',$request->route('id'),$e);
+
         }
 
-        return $company->delete() ? 'Company deleated' : 'Error while deleating company';
+        return new CompanyResource($company, array('type' => 'update','route' => 'company.update'));
+
+    }
+
+    public function delete(Request $request)
+    {
+        try {
+
+            $company = Company::findOrFail($request->route('id'));
+
+        } catch(\Throwable $e) {
+
+            return ResponseService::exception('CompanyController.delete',$request->route('id'),$e);
+
+        }
+
+        return $company->delete() ? 'company deleated' : 'Error while deleating company';
     }
    
     public function store(StoreCompany $request)

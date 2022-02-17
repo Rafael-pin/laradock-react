@@ -26,22 +26,46 @@ class UserController extends Controller
 
     public function get(Request $request)
     {
-        $user = User::findOrFail($request->route('id'));
- 
-        if (!$user) {
-            throw new \Exception('Not found', -404);
+        try { 
+
+            $user = User::findOrFail($request->route('id'));
+
+        } catch(\Throwable $e) {
+
+            return ResponseService::exception('UserController.get',$request->route('id'),$e);
         }
 
         return $user;
+    }
+
+    public function update(Request $request)
+    {
+        try { 
+
+            $user = $this->get($request);
+
+            $user->update($request->all());
+
+        } catch(\Throwable $e) {
+
+            return ResponseService::exception('UserController.update',$request->route('id'),$e);
+
+        }
+
+        return new UserResource($user, array('type' => 'update','route' => 'user.update'));
 
     }
 
     public function delete(Request $request)
     {
-        $user = User::findOrFail($request->route('id'));
- 
-        if (!$user) {
-            throw new \Exception('Not found', -404);
+        try {
+
+            $user = User::findOrFail($request->route('id'));
+
+        } catch(\Throwable $e) {
+
+            return ResponseService::exception('UserController.delete',$request->route('id'),$e);
+
         }
 
         return $user->delete() ? 'User deleated' : 'Error while deleating user';
