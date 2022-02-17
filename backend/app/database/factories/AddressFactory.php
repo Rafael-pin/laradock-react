@@ -15,7 +15,7 @@ class AddressFactory extends Factory
     {
         return [
             'number' => $this->faker->numerify('####'),
-            'CEP' => $this->faker->postcode()
+            'cep' => $this->faker->postcode()
         ];
     }
 }

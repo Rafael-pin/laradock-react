@@ -16,7 +16,7 @@ class Address extends Model
      */
     protected $fillable = [
         'number',
-        'CEP',
+        'cep',
     ];
 
     /**
@@ -34,6 +34,14 @@ class Address extends Model
      */
     protected $casts = [
     ];
+
+    public function create($fields)
+    {
+        return parent::create([
+            'number' => $fields['number'],
+            'cep' => $fields['cep'],
+        ]);
+    }
 
     public function company()
     {

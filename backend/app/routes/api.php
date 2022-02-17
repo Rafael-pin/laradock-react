@@ -14,4 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/new_user', 'App\Http\Controllers\UserController@create')->name('users.create');
+Route::post('/new_user', 'App\Http\Controllers\UserController@store')->name('user.store');
+
+Route::post('/new_address', 'App\Http\Controllers\AddressController@store')->name('address.store');

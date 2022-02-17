@@ -4,39 +4,34 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use Illuminate\Http\Request;
+use App\Http\Requests\Address\StoreAddress;
+use App\Services\ResponseService;
+use App\Transformers\Address\AddressResource;
+use App\Transformers\Address\AddressResourceCollection;
 
+use App\Transformers\User\UserResource;
 class AddressController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    private $address;
+
+    public function __construct(Address $address)
     {
-        //
+        $this->address = $address;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(StoreAddress $request)
     {
-        //
-    }
+        try{        
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        $address = $this->address->create($request->all());
+
+    }catch(\Throwable $e) {
+
+        return ResponseService::exception('address.store', null, $e);
+
     }
+    return new AddressResource($address, array('type' => 'store','route' => 'address.store'));
+}
 
     /**
      * Display the specified resource.
@@ -78,7 +73,7 @@ class AddressController extends Controller
      * @param  \App\Models\Address  $address
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Address $address)
+    public function destroy(Address $Address)
     {
         //
     }

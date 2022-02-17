@@ -4,63 +4,36 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\User\StoreUser;
+use App\Services\ResponseService;
+use App\Transformers\User\UserResource;
+use App\Transformers\User\UserResourceCollection;
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    private $user;
+
+    public function __construct(User $user)
     {
-        return User::select(
-            'name',
-            'email',
-            'phone',
-            'birthdate',
-            'city',
-        )->get();
+        $this->user = $user;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
+    public function store(StoreUser $request)
     {
-        $request->validate([
-            'name'=>'required',
-            'email'=>'required',
-            'company_id'=>'required'
-        ]);
+        try{        
 
-        try {
-            
-            User::create($request->post());
+            $user = $this->user->create($request->all());
 
-            return response()->json([
-                'message'=>'User Created Successfully!!'
-            ]);
-        }catch(\Exception $e) {
-            \Log::error($e->getMessage());
-            return response()->json([
-                'message'=>'Something goes wrong while creating a user!!'
-            ],500);
+        }catch(\Throwable $e) {
+
+            return ResponseService::exception('user.store', null, $e);
+
         }
+
+        return new UserResource($user, array('type' => 'store','route' => 'user.store'));
+    
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store()
-    {
-       
-    }
 
     /**
      * Display the specified resource.

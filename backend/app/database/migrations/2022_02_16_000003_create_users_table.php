@@ -17,9 +17,9 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('phone');
-            $table->string('birthdate');
-            $table->string('city');
+            $table->string('phone')->nullable();
+            $table->string('birthdate')->nullable();
+            $table->string('city')->nullable();
             $table->unsignedBigInteger('company_id');
             $table->foreign('company_id')->references('id')->on('companies');
             $table->timestamps();

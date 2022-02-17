@@ -20,6 +20,7 @@ class User extends Model
         'phone',
         'birthdate',
         'city',
+        'company_id'
     ];
 
     /**
@@ -38,6 +39,18 @@ class User extends Model
     protected $casts = [
         'birthdate' => 'datetime'
     ];
+
+    public function create($fields)
+    {
+        return parent::create([
+            'name' => $fields['name'],
+            'email' => $fields['email'],
+            'phone' => $fields['phone'],
+            'city' => $fields['city'],
+            'birthdate' =>$fields['birthdate'],
+            'company_id' => $fields['company_id'],
+        ]);
+    }
 
     public function company()
     {
