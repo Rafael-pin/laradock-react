@@ -21,7 +21,7 @@ class StoreUser extends FormRequest
         return [
             'email'      => 'unique:users,email|email|required',
             'name'       => 'required',
-            'company_id' => 'required',
+            'company_id' => 'required|exists:companies,id',
         ];
     }
 
