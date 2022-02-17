@@ -14,8 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/new_user', 'App\Http\Controllers\UserController@store')->name('user.store');
+Route::prefix('user')->group(function () {
+    Route::get('/', 'App\Http\Controllers\UserController@index')->name('user.index');
+    Route::get('/{id}', 'App\Http\Controllers\UserController@get')->name('user.get');
+    Route::post('/new', 'App\Http\Controllers\UserController@store')->name('user.store');
+});
+
 
 Route::post('/new_address', 'App\Http\Controllers\AddressController@store')->name('address.store');
 
 Route::post('/new_company', 'App\Http\Controllers\CompanyController@store')->name('company.store');
+
+

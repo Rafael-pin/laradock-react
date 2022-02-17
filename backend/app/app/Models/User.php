@@ -38,6 +38,11 @@ class User extends Model
         ]);
     }
 
+    public function index() 
+    {
+        return $this->all();
+    }
+
     public function company()
     {
         return $this->belongsTo(Company::class);

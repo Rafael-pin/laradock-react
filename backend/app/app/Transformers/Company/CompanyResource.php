@@ -26,13 +26,13 @@ class CompanyResource extends JsonResource
         ];
     }
 
-    // public function with($request)
-    // {
-    //     return ResponseService::default($this->config, $this->id);
-    // }
+    public function with($request)
+    {
+        return ResponseService::default($this->config, $this->id);
+    }
 
-    // public function withResponse($request, $response)
-    // {
-    //     $response->setStatusCode(200);
-    // }
+    public function withResponse($request, $response)
+    {
+        $response->setStatusCode(200);
+    }
 }

@@ -19,6 +19,22 @@ class UserController extends Controller
         $this->user = $user;
     }
 
+    public function index()
+    {
+        return new UserResourceCollection($this->user->index());
+    }
+
+    public function get(Request $request)
+    {
+        $user = User::findOrFail($request->route('id'));
+ 
+        if (!$user) {
+            throw new \Exception('Not found', -404);
+        }
+
+        return $user;
+    }
+
     public function store(StoreUser $request)
     {
         try{        
