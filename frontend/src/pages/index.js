@@ -18,7 +18,7 @@ export default function UsersPage() {
       console.log('Response:')
       console.log(response);
 
-      await setUsersList([...userList, response.data.data]);
+      setUsersList([...userList, response.data.data]);
 
     }).catch(err => {
 
