@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // import { Link, useHistory } from 'react-router-dom';
 import api from '../services/api';
-import './styles.css';
 
 import CrudTable from './crudTable';
 
@@ -13,17 +12,19 @@ export default function UsersPage() {
   
   useEffect(() => {
     
-      api.get('api/user',{}).then(response => {
+    api.get('api/user',{}).then(response => {
 
-        console.log(response);
 
-        setUsersList([...userList, response.data.data]);
+      console.log('Response:')
+      console.log(response);
 
-      }).catch(err => {
+      await setUsersList([...userList, response.data.data]);
 
-        alert(err)
+    }).catch(err => {
 
-      });
+      alert(err)
+
+    });
 
   }, []);
 

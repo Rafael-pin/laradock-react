@@ -19,9 +19,6 @@ function EditToolbar(props) {
 
   const { apiRef } = props;
 
-  console.log("prop");
-  console.log(props);
-
   const handleClick = (id) => {
 
     // const id = randomId();
@@ -59,7 +56,10 @@ EditToolbar.propTypes = {
 export default function FullFeaturedCrudGrid(props) {
   const apiRef = useGridApiRef();
 
-  const rows = props.data
+  const rows = props.data[0];
+
+  console.log("rows");
+  console.log(rows);
 
   const handleRowEditStart = (params, event) => {
     event.defaultMuiPrevented = true;
@@ -90,6 +90,9 @@ export default function FullFeaturedCrudGrid(props) {
   };
 
   const handleDeleteClick = (id) => (event) => {
+
+    console.log('delete');
+
     event.stopPropagation();
     apiRef.current.updateRows([{ id, _action: 'delete' }]);
   };
@@ -106,21 +109,9 @@ export default function FullFeaturedCrudGrid(props) {
 
   const columns = [
     { field: 'name', headerName: 'Name', width: 180, editable: true },
-    { field: 'age', headerName: 'Age', type: 'number', editable: true },
-    {
-      field: 'dateCreated',
-      headerName: 'Date Created',
-      type: 'date',
-      width: 180,
-      editable: true,
-    },
-    {
-      field: 'lastLogin',
-      headerName: 'Last Login',
-      type: 'dateTime',
-      width: 220,
-      editable: true,
-    },
+    { field: 'email', headerName: 'Email', width: 180, editable: true },
+    { field: 'phone', headerName: 'Phone', width: 180, editable: true },
+    { field: 'city', headerName: 'City', width: 450, editable: true },
     {
       field: 'actions',
       type: 'actions',
