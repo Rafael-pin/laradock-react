@@ -14,12 +14,6 @@ import {
   GridToolbarContainer,
   GridActionsCellItem,
 } from '@mui/x-data-grid-pro';
-import {
-  randomCreatedDate,
-  randomTraderName,
-  randomUpdatedDate,
-  randomId,
-} from '@mui/x-data-grid-generator'
 
 function EditToolbar(props) {
 
@@ -31,6 +25,7 @@ function EditToolbar(props) {
   const handleClick = (id) => {
 
     // const id = randomId();
+    
     apiRef.current.updateRows([{ id, isNew: true }]);
     apiRef.current.setRowMode(id, 'edit');
     // Wait for the grid to render with the new row

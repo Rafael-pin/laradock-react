@@ -21,6 +21,7 @@ class AddressResource extends JsonResource
     {
       
         return [
+            'id' => $this->id,
             'cep'    => $this->cep,
             'number' => $this->number,
         ];
