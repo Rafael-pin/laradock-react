@@ -1,56 +1,42 @@
-import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { FiLogIn } from 'react-icons/fi';
-
+import React, { useState, useEffect } from 'react';
+// import { Link, useHistory } from 'react-router-dom';
 import api from '../services/api';
-
 import './styles.css';
 
-export default function usersPage() {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const history = useHistory();
+import CrudTable from './crudTable';
 
-  // async function handleLogin(e) {
-  //   e.preventDefault();
+import { StyledEngineProvider } from '@mui/material/styles';
 
-  //   try {
-  //     const response = await api.post('api/login', { email, password });
-  //     localStorage.setItem('token', response.data.token);
+export default function UsersPage() {
 
-  //     history.push('/lists');
-  //   } catch (err) {
-  //     alert('Falha no login, tente novamente.');
-  //   }
-  // }
+  const [userList, setUsersList] = useState([]);
+  
+  useEffect(() => {
+    
+      api.get('api/user',{}).then(response => {
+
+        console.log(response);
+
+        setUsersList([...userList, response.data.data]);
+
+      }).catch(err => {
+
+        alert(err)
+
+      });
+
+  }, []);
+
+
 
   return (
     <div className="users-container">
       <section className="form">
 
-        test
+      <StyledEngineProvider injectFirst>
+        <CrudTable rows={userList} />
+      </StyledEngineProvider>,
 
-        {/* <form onSubmit={handleLogin}>
-          <input 
-
-            placeholder="Seu e-mail"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-          <input 
-            placeholder="Sua Senha"
-            type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-
-          <button className="button" type="submit">Entrar</button>
-
-          <Link className="back-link" to="/register">
-            <FiLogIn size={16} color="#3498db" />
-            Não tenho cadastro
-          </Link>
-        </form> */}
       </section>
     </div>
   );
