@@ -34,7 +34,7 @@ export default function UsersPage() {
       <section className="form">
 
       <StyledEngineProvider injectFirst>
-        <CrudTable rows={userList} />
+        <CrudTable data={userList} />
       </StyledEngineProvider>,
 
       </section>

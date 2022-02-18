@@ -25,6 +25,9 @@ function EditToolbar(props) {
 
   const { apiRef } = props;
 
+  console.log("prop");
+  console.log(props);
+
   const handleClick = (id) => {
 
     // const id = randomId();
@@ -58,8 +61,10 @@ EditToolbar.propTypes = {
   }).isRequired,
 };
 
-export default function FullFeaturedCrudGrid() {
+export default function FullFeaturedCrudGrid(props) {
   const apiRef = useGridApiRef();
+
+  const rows = props.data
 
   const handleRowEditStart = (params, event) => {
     event.defaultMuiPrevented = true;
@@ -181,7 +186,7 @@ export default function FullFeaturedCrudGrid() {
       }}
     >
       <DataGridPro
-        rows={apiRef.rows}
+        rows={rows}
         columns={columns}
         apiRef={apiRef}
         editMode="row"
