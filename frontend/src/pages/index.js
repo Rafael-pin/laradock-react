@@ -1,56 +1,43 @@
-import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { FiLogIn } from 'react-icons/fi';
-
+import React, { useState, useEffect } from 'react';
+// import { Link, useHistory } from 'react-router-dom';
 import api from '../services/api';
 
-import './styles.css';
+import CrudTable from './crudTable';
 
-export default function usersPage() {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const history = useHistory();
+import { StyledEngineProvider } from '@mui/material/styles';
 
-  // async function handleLogin(e) {
-  //   e.preventDefault();
+export default function UsersPage() {
 
-  //   try {
-  //     const response = await api.post('api/login', { email, password });
-  //     localStorage.setItem('token', response.data.token);
+  const [userList, setUsersList] = useState([]);
+  
+  useEffect(() => {
+    
+    api.get('api/user',{}).then(response => {
 
-  //     history.push('/lists');
-  //   } catch (err) {
-  //     alert('Falha no login, tente novamente.');
-  //   }
-  // }
+
+      console.log('Response:')
+      console.log(response);
+
+      setUsersList([...userList, response.data.data]);
+
+    }).catch(err => {
+
+      alert(err)
+
+    });
+
+  }, []);
+
+
 
   return (
     <div className="users-container">
       <section className="form">
 
-        test
+      <StyledEngineProvider injectFirst>
+        <CrudTable data={userList} />
+      </StyledEngineProvider>,
 
-        {/* <form onSubmit={handleLogin}>
-          <input 
-
-            placeholder="Seu e-mail"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-          <input 
-            placeholder="Sua Senha"
-            type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-
-          <button className="button" type="submit">Entrar</button>
-
-          <Link className="back-link" to="/register">
-            <FiLogIn size={16} color="#3498db" />
-            Não tenho cadastro
-          </Link>
-        </form> */}
       </section>
     </div>
   );
