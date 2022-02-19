@@ -1,35 +1,41 @@
-import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { FiLogIn } from 'react-icons/fi';
-
+import React, { useState, useEffect } from 'react';
+// import { Link, useHistory } from 'react-router-dom';
 import api from '../services/api';
 
-import './styles.css';
+import CrudTable from './crudTable';
 
-export default function usersPage() {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const history = useHistory();
+import { StyledEngineProvider } from '@mui/material/styles';
 
-  // async function handleLogin(e) {
-  //   e.preventDefault();
+export default function UsersPage() {
 
-  //   try {
-  //     const response = await api.post('api/login', { email, password });
-  //     localStorage.setItem('token', response.data.token);
+  const [userList, setUsersList] = useState([]);
+  
+  useEffect(() => {
+    
+    api.get('api/user',{}).then(response => {
 
-  //     history.push('/lists');
-  //   } catch (err) {
-  //     alert('Falha no login, tente novamente.');
-  //   }
-  // }
+
+      console.log('Response:')
+      console.log(response);
+
+      setUsersList([...userList, response.data.data]);
+
+    }).catch(err => {
+
+      alert(err)
+
+    });
+
+  }, []);
+
+
 
   return (
     <div className="users-container">
       <section className="form">
 
       <StyledEngineProvider injectFirst>
-        <CrudTable rows={userList} />
+        <CrudTable data={userList} />
       </StyledEngineProvider>,
 
       </section>
