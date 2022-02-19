@@ -30,13 +30,7 @@ export default function UsersPage() {
     <div className="users-container">
       <section className="form">
 
-      <StyledEngineProvider injectFirst>
-
-      {userList}
-
-        {/* <CrudTable data={userList} /> */}
-
-      </StyledEngineProvider>,
+      {/* {[userList]} */}
 
       </section>
     </div>
