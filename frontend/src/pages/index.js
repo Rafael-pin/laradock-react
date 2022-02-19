@@ -28,29 +28,10 @@ export default function usersPage() {
     <div className="users-container">
       <section className="form">
 
-        test
+      <StyledEngineProvider injectFirst>
+        <CrudTable rows={userList} />
+      </StyledEngineProvider>,
 
-        {/* <form onSubmit={handleLogin}>
-          <input 
-
-            placeholder="Seu e-mail"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-          />
-          <input 
-            placeholder="Sua Senha"
-            type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-
-          <button className="button" type="submit">Entrar</button>
-
-          <Link className="back-link" to="/register">
-            <FiLogIn size={16} color="#3498db" />
-            Não tenho cadastro
-          </Link>
-        </form> */}
       </section>
     </div>
   );
