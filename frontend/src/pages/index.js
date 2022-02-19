@@ -2,10 +2,6 @@ import React, { useState, useEffect } from 'react';
 // import { Link, useHistory } from 'react-router-dom';
 import api from '../services/api';
 
-import CrudTable from './crudTable';
-
-import { StyledEngineProvider } from '@mui/material/styles';
-
 export default function UsersPage() {
 
   const [userList, setUsersList] = useState([]);
@@ -35,7 +31,11 @@ export default function UsersPage() {
       <section className="form">
 
       <StyledEngineProvider injectFirst>
-        <CrudTable data={userList} />
+
+      {userList}
+
+        {/* <CrudTable data={userList} /> */}
+
       </StyledEngineProvider>,
 
       </section>
