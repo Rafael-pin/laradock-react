@@ -3,27 +3,27 @@ import { Modal, Form, SelectPicker, Button } from 'rsuite';
 import api from '../../services/api';
 
 
-export default function AddressDataModal(props) {
+export default function AddressEditModal(props) {
   const [open, setOpen] = React.useState(false);
   const [formValue, setFormValue] = React.useState({
-    cep: props.rowData ? props.rowData.cep : '',
-    number: props.rowData ? props.rowData.cep : '',
+    cep: '',
+    number: '',
   });
 
-  const handleCreate = () => {
-    setOpen(false);
+  const handleEdit = () => {
+    setOpen(true);
 
-    console.log(formValue)
+    console.log('edit')
 
-    api.post(`api/address/new`, formValue).then(response => {
+    // api.post(`api/address/new`, formValue).then(response => {
 
-      alert('success');
+    //   alert('success');
 
-    }).catch(err => {
+    // }).catch(err => {
 
-      alert(err)
+    //   alert(err)
 
-    });
+    // });
   };
   
   const handleClose = () => {
@@ -55,7 +55,7 @@ export default function AddressDataModal(props) {
             </Form>
           </Modal.Body>
           <Modal.Footer>
-          <Button onClick={handleCreate} appearance="primary">
+          <Button onClick={handleEdit} appearance="primary">
               Confirm
           </Button>
           <Button onClick={handleClose} appearance="subtle">

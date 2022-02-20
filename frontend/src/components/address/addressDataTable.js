@@ -32,14 +32,11 @@ export default function AddressDataTable(props) {
           <HeaderCell>Action</HeaderCell>
           <Cell>
             {rowData => {
-              function deleteRow() {
-
-                props.deleteRow(rowData.id)
-
+            function deleteRow() {
+              props.deleteRow(rowData.id)
             }
             function editRow() {
-              alert(`edit id:${rowData.id}`);
-              
+              props.editRow(rowData)
             }
             return (
               <ButtonGroup>

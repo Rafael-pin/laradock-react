@@ -93,7 +93,8 @@ Class ResponseService{
         return response()->json([
           'status' => false,
           'statusCode' => 500,
-          'error'  => 'Problem while executing.',
+          // 'error'  => 'Problem while executing.',
+          'error' => $e,
           'url'    => $id != null ? route($route, $id) : route($route)
         ],500);
 

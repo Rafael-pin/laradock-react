@@ -13,17 +13,20 @@ import UserDataTable from '../components/user/userDataTable';
 import AddressDataTable from '../components/address/addressDataTable';
 import CompanyDataTable from '../components/company/companyDataTable';
 
+import UserDataModal from '../components/user/userDataModal';
+import CompanyDataModal from '../components/company/companyDataModal';
+import AddressDataModal from '../components/address/addressDataModal';
+
+import AddressEditModal from '../components/address/addressEditModal';
+
+
 export default function MainPage() {
 
   const [items, setItems] = useState([]);
   const [eventKey, setEventKey] = useState('');
+  const [open, setOpen] = React.useState(false);
 
   const deleteRow = (id) => {
-
-    console.log('id')
-    console.log(id)
-    console.log(eventKey)
-
 
     api.delete(`api/${eventKey}/delete/${id}`, {}).then(response => {
 
@@ -34,6 +37,32 @@ export default function MainPage() {
       alert(err)
 
     });
+  }
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const EditModal = (id) => {
+
+    console.log('editModal id:');
+
+    console.log(id)
+
+    switch(eventKey) {
+      case 'user':
+        return <AddressEditModal/>
+      case 'address':
+        // return <AddressDataTable items={items[1]} deleteRow={deleteRow} editRow={editRow}/>
+      case 'company':
+        // return <CompanyDataTable items={items[1]} deleteRow={deleteRow} editRow={editRow}/>
+    }
+    return '';
+
   }
 
   const getItems = (eventKey) => {
@@ -54,19 +83,13 @@ export default function MainPage() {
   const RenderTable = () => {
     switch(eventKey) {
       case 'user':
-        return <Content align="center">
-                <UserDataTable items={items[1]} deleteRow={deleteRow}/>
-              </Content>
+        return <UserDataTable items={items[1]} deleteRow={deleteRow} editRow={EditModal}/>
       case 'address':
-        return <AddressDataTable items={items[1]} deleteRow={deleteRow} />
+        return <AddressDataTable items={items[1]} deleteRow={deleteRow} editRow={EditModal}/>
       case 'company':
-        return <CompanyDataTable items={items[1]} deleteRow={deleteRow} />
+        return <CompanyDataTable items={items[1]} deleteRow={deleteRow} editRow={EditModal}/>
     }
     return '';
-  }
-
-  const handleOpen = () => {
-    return ''
   }
 
   return (
@@ -76,6 +99,7 @@ export default function MainPage() {
 
       <RenderTable />
       
+      <EditModal/>
 
     </div>
   );

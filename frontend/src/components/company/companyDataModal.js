@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Form, SelectPicker, Button } from 'rsuite';
+import api from '../../services/api';
 
 export default function CompanyDataModal(props) {
   const [open, setOpen] = React.useState(false);
@@ -18,6 +19,22 @@ export default function CompanyDataModal(props) {
     setOpen(true);
   };
 
+  const handleCreate = () => {
+    setOpen(false);
+
+    console.log(formValue)
+
+    api.post(`api/company/new`, formValue).then(response => {
+
+      alert('success');
+
+    }).catch(err => {
+
+      alert(err)
+
+    });
+  };
+
   return (
     <div>
       <Modal open={open} onClose={handleClose} size="xs">
@@ -26,17 +43,17 @@ export default function CompanyDataModal(props) {
           </Modal.Header>
           <Modal.Body>
             <Form fluid onChange={setFormValue} formValue={formValue}>
-                <Form.Group controlId="name-9">
+                <Form.Group controlId="name">
                   <Form.ControlLabel>Name</Form.ControlLabel>
                   <Form.Control name="name" />
                   <Form.HelpText>Required</Form.HelpText>
                 </Form.Group>
-                <Form.Group controlId="email-9">
+                <Form.Group controlId="cnpj">
                   <Form.ControlLabel>CNPJ</Form.ControlLabel>
-                  <Form.Control name="cnpj" type="email" />
+                  <Form.Control name="cnpj" type="number" />
                   <Form.HelpText>Required</Form.HelpText>
                 </Form.Group>
-                <Form.Group controlId="company_id-9">
+                <Form.Group controlId="company_id">
                   <Form.ControlLabel>Address_id</Form.ControlLabel>
                   <Form.Control name="address_id" type="number" />
                   <Form.HelpText>Required</Form.HelpText>
@@ -44,7 +61,7 @@ export default function CompanyDataModal(props) {
             </Form>
           </Modal.Body>
           <Modal.Footer>
-          <Button onClick={handleClose} appearance="primary">
+          <Button onClick={handleCreate} appearance="primary">
               Confirm
           </Button>
           <Button onClick={handleClose} appearance="subtle">

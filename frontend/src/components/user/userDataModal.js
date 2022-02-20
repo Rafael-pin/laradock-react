@@ -1,14 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Form, SelectPicker, Button } from 'rsuite';
+import api from '../../services/api';
+
 
 export default function UserDataModal(props) {
   const [open, setOpen] = React.useState(false);
   const [formValue, setFormValue] = React.useState({
     name: '',
     email: '',
-    password: '',
-    textarea: ''
+    phone: '',
+    company_id: '',
+    birthdate: '',
+    city: ''
   });
+
+  const handleCreate = () => {
+    setOpen(false);
+
+    console.log(formValue)
+
+    api.post(`api/user/new`, formValue).then(response => {
+
+      alert('success');
+
+    }).catch(err => {
+
+      alert(err)
+
+    });
+  };
 
   const handleClose = () => {
     setOpen(false);
@@ -26,25 +46,31 @@ export default function UserDataModal(props) {
           </Modal.Header>
           <Modal.Body>
             <Form fluid onChange={setFormValue} formValue={formValue}>
-                <Form.Group controlId="name-9">
+                <Form.Group controlId="name">
                   <Form.ControlLabel>Name</Form.ControlLabel>
                   <Form.Control name="name" />
                   <Form.HelpText>Required</Form.HelpText>
                 </Form.Group>
-                <Form.Group controlId="email-9">
+                <Form.Group controlId="email">
                   <Form.ControlLabel>Email</Form.ControlLabel>
                   <Form.Control name="email" type="email" />
                   <Form.HelpText>Required</Form.HelpText>
                 </Form.Group>
-                <Form.Group controlId="password-9">
+                <Form.Group controlId="password">
                   <Form.ControlLabel>Phone</Form.ControlLabel>
-                  <Form.Control name="phone" type="password" autoComplete="off" />
+                  <Form.Control name="phone" type="number" autoComplete="off" />
                 </Form.Group>
-                <Form.Group controlId="password-9">
-                  <Form.ControlLabel>Password</Form.ControlLabel>
-                  <Form.Control name="password" type="password" autoComplete="off" />
+                <Form.Group controlId="birthdate">
+                  <Form.ControlLabel>Birthdate</Form.ControlLabel>
+                  <Form.Control name="birthdate" type="date" />
+                  <Form.HelpText>Required</Form.HelpText>
                 </Form.Group>
-                <Form.Group controlId="company_id-9">
+                <Form.Group controlId="city">
+                  <Form.ControlLabel>City</Form.ControlLabel>
+                  <Form.Control name="city" type="text" />
+                  <Form.HelpText>Required</Form.HelpText>
+                </Form.Group>
+                <Form.Group controlId="company_id">
                   <Form.ControlLabel>Company_id</Form.ControlLabel>
                   <Form.Control name="company_id" type="number" />
                   <Form.HelpText>Required</Form.HelpText>
@@ -52,7 +78,7 @@ export default function UserDataModal(props) {
             </Form>
           </Modal.Body>
           <Modal.Footer>
-          <Button onClick={handleClose} appearance="primary">
+          <Button onClick={handleCreate} appearance="primary">
               Confirm
           </Button>
           <Button onClick={handleClose} appearance="subtle">
