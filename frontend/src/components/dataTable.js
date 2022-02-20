@@ -8,25 +8,12 @@ import 'rsuite/dist/rsuite.min.css'
 
 export default function DataTable(props) {
 
-
-  const [open, setOpen] = React.useState(false);
-  const [backdrop, setBackdrop] = React.useState('static');
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const Message = React.forwardRef(({ type, ...rest }, ref) => {
-    return (
-      <Notification ref={ref} {...rest} type={type} header={type}>
-        Success
-      </Notification>
-    );
-  });
-
-  <Message type="success" />
+  console.log('porps.items:')
+  console.log(props.items[1])
 
   return (
     <div className="table-container">
-      <Table data={props.items} height={500} onRowClick={data => { console.log(data); }}>
+      <Table data={props.items[1]} height={500} onRowClick={data => { console.log(data); }}>
 
         <Column width={100} align="center">
           <HeaderCell>ID</HeaderCell>

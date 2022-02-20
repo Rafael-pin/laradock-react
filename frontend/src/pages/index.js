@@ -29,9 +29,10 @@ export default function MainPage() {
 
     api.get(`api/${eventKey}`,{}).then(response => {
 
+      console.log('repsonse:')
       console.log(response)
 
-      setItems([items, response]);
+      setItems([items, response.data.data]);
 
     }).catch(err => {
 
@@ -45,7 +46,7 @@ export default function MainPage() {
   }
 
   const RenderTable = () => {
-    return <DataTable items={{items}}/>
+    return <DataTable items={items}/>
   }
 
   return (
