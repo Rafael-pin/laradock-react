@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import api from '../services/api';
+import api from '../../services/api';
 
 import { Table, Column, HeaderCell, Cell } from 'rsuite-table';
 import { Modal, Form, Notification, Button, ButtonGroup, Navbar, Nav,} from 'rsuite';
@@ -7,14 +7,17 @@ import { Modal, Form, Notification, Button, ButtonGroup, Navbar, Nav,} from 'rsu
 import 'rsuite/dist/rsuite.min.css'
 
 
-export default function DataTable(props) {
-  
-  // console.log(props.items)
+export default function UserDataTable(props) {
 
   return (
     <div className="table-container">
       <Table data={props.items ? props.items : []} height={500} onRowClick={data => { console.log(data); }}>
        
+        <Column width={0} align="center">
+          <HeaderCell>ID</HeaderCell>
+          <Cell dataKey='id' />
+        </Column>
+
         <Column width={0} align="center">
           <HeaderCell>ID</HeaderCell>
           <Cell dataKey="id" />
@@ -33,6 +36,11 @@ export default function DataTable(props) {
         <Column width={300} align="center" sortable>
           <HeaderCell>City</HeaderCell>
           <Cell dataKey="city" />
+        </Column>
+
+        <Column width={300} align="center" sortable>
+          <HeaderCell>City</HeaderCell>
+          <Cell dataKey="company_id" />
         </Column>
 
         <Column width={300} align="center">

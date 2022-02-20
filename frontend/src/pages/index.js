@@ -6,7 +6,10 @@ import { Table, Column, HeaderCell, Cell } from 'rsuite-table';
 import { Modal, Form, Notification, Button, ButtonGroup, Navbar, Nav,} from 'rsuite';
 
 import Header from '../components/header';
-import DataTable from '../components/dataTable';
+import UserDataTable from '../components/user/userDataTable';
+import AddressDataTable from '../components/address/addressDataTable';
+import CompanyDataTable from '../components/company/companyDataTable';
+
 
 export default function MainPage() {
 
@@ -47,7 +50,15 @@ export default function MainPage() {
   }
 
   const RenderTable = () => {
-    return <DataTable items={items[1]} deleteRow={deleteRow}/>
+    switch(eventKey){
+      case 'user':
+        return <UserDataTable items={items[1]} deleteRow={deleteRow}/>
+      case 'address':
+        return <AddressDataTable items={items[1]} deleteRow={deleteRow}/>
+      case 'company':
+        return <CompanyDataTable items={items[1]} deleteRow={deleteRow}/>
+    }
+    return '';
   }
 
   const handleOpen = () => {
