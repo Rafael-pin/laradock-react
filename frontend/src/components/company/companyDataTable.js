@@ -1,10 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import api from '../../services/api';
-
+import React  from 'react';
 import { Table, Column, HeaderCell, Cell } from 'rsuite-table';
-import { Modal, Form, Notification, Button, ButtonGroup, Navbar, Nav,} from 'rsuite';
-
-import 'rsuite/dist/rsuite.min.css'
+import { Button, ButtonGroup} from 'rsuite';
 
 
 export default function CompanyDataTable(props) {

@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Modal, Form, SelectPicker, Button } from 'rsuite';
+import React from 'react';
+import { Modal, Form, Button } from 'rsuite';
 import api from '../../services/api';
-
 
 export default function UserDataModal(props) {
   const [open, setOpen] = React.useState(false);
@@ -63,12 +62,10 @@ export default function UserDataModal(props) {
                 <Form.Group controlId="birthdate">
                   <Form.ControlLabel>Birthdate</Form.ControlLabel>
                   <Form.Control name="birthdate" type="date" />
-                  <Form.HelpText>Required</Form.HelpText>
                 </Form.Group>
                 <Form.Group controlId="city">
                   <Form.ControlLabel>City</Form.ControlLabel>
                   <Form.Control name="city" type="text" />
-                  <Form.HelpText>Required</Form.HelpText>
                 </Form.Group>
                 <Form.Group controlId="company_id">
                   <Form.ControlLabel>Company_id</Form.ControlLabel>

@@ -1,13 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import api from '../../services/api';
-
 import { Table, Column, HeaderCell, Cell } from 'rsuite-table';
-import { Modal, Form, Notification, Button, ButtonGroup, Navbar, Nav,} from 'rsuite';
-
-import AddressDataModal from './addressDataModal';
-
+import { Button, ButtonGroup} from 'rsuite';
 import 'rsuite/dist/rsuite.min.css'
-
 
 export default function AddressDataTable(props) {
 
@@ -37,18 +30,7 @@ export default function AddressDataTable(props) {
             function deleteRow() {
               props.deleteRow(rowData.id)
             }
-            function editRow() {
-
-              console.log(rowData);
-
-              props.editRow(rowData.id);
-
-              props.handleOpen();
-
-              // return <AddressDataModal onClick={props.handleOpen}/>
-
-
-            }
+            function editRow() {}
             return (
               <ButtonGroup>
                 <Button color="blue" appearance="subtle" onClick={editRow}> Edit </Button> 

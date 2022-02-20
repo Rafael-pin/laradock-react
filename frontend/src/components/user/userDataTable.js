@@ -1,11 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import api from '../../services/api';
-
+import React from 'react';
 import { Table, Column, HeaderCell, Cell } from 'rsuite-table';
-import { Modal, Form, Notification, Button, ButtonGroup, Navbar, Nav,} from 'rsuite';
-
-import 'rsuite/dist/rsuite.min.css'
-
+import { Button, ButtonGroup} from 'rsuite';
 
 export default function UserDataTable(props) {
 
@@ -53,14 +48,9 @@ export default function UserDataTable(props) {
           <Cell>
             {rowData => {
               function deleteRow() {
-
                 props.deleteRow(rowData.id)
-
             }
-            function editRow() {
-              // alert(`edit id:${rowData.id}`);
-              
-            }
+            function editRow() {}
             return (
               <ButtonGroup>
                 <Button color="blue" appearance="subtle" onClick={editRow}> Edit </Button> 

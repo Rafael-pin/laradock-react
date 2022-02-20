@@ -6,11 +6,7 @@ import UserDataTable from '../components/user/userDataTable';
 import AddressDataTable from '../components/address/addressDataTable';
 import CompanyDataTable from '../components/company/companyDataTable';
 
-import AddressEditModal from '../components/address/addressEditModal';
-
-
 export default function MainPage() {
-  const [open, setOpen] = React.useState(false);
   const [items, setItems] = useState([]);
   const [eventKey, setEventKey] = useState('');
 
@@ -27,15 +23,7 @@ export default function MainPage() {
     });
   }
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const editRow = (dataRow) => {
-    
-  
-    return <AddressEditModal onClick={handleOpen}/>
-  }
+  const editRow = (dataRow) => {}
 
   const getItems = (eventKey) => {
 

@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Modal, Form, SelectPicker, Button } from 'rsuite';
+import React from 'react';
+import { Modal, Form, Button } from 'rsuite';
 import api from '../../services/api';
-
 
 export default function AddressDataModal(props) {
   const [open, setOpen] = React.useState(false);
@@ -53,12 +52,12 @@ export default function AddressDataModal(props) {
             </Form>
           </Modal.Body>
           <Modal.Footer>
-          <Button onClick={handleCreate} appearance="primary">
-              Confirm
-          </Button>
-          <Button onClick={handleClose} appearance="subtle">
-              Cancel
-          </Button>
+            <Button onClick={handleCreate} appearance="primary">
+                Confirm
+            </Button>
+            <Button onClick={handleClose} appearance="subtle">
+                Cancel
+            </Button>
           </Modal.Footer>
       </Modal>
       <Button onClick={handleOpen}>New Address</Button>
