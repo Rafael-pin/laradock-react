@@ -38,7 +38,7 @@ export default function UserDataTable(props) {
           <Cell dataKey="city" />
         </Column>
 
-        <Column width={300} align="center" sortable>
+        <Column width={0} align="center" sortable>
           <HeaderCell>City</HeaderCell>
           <Cell dataKey="company_id" />
         </Column>
