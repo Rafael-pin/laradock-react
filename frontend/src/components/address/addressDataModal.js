@@ -13,8 +13,6 @@ export default function AddressDataModal(props) {
   const handleCreate = () => {
     setOpen(false);
 
-    console.log(formValue)
-
     api.post(`api/address/new`, formValue).then(response => {
 
       alert('success');

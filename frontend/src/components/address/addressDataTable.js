@@ -11,7 +11,7 @@ export default function AddressDataTable(props) {
 
   return (
     <div className="table-container">
-      <Table data={props.items ? props.items : []} height={500} onRowClick={data => { console.log(data); }}>
+      <Table data={props.items ? props.items : []} height={500}>
        
         <Column width={0} align="center">
           <HeaderCell>ID</HeaderCell>
@@ -36,7 +36,9 @@ export default function AddressDataTable(props) {
               props.deleteRow(rowData.id)
             }
             function editRow() {
-              props.editRow(rowData)
+
+              console.log(rowData)
+
             }
             return (
               <ButtonGroup>

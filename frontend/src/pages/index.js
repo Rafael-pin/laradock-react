@@ -13,12 +13,6 @@ import UserDataTable from '../components/user/userDataTable';
 import AddressDataTable from '../components/address/addressDataTable';
 import CompanyDataTable from '../components/company/companyDataTable';
 
-import UserDataModal from '../components/user/userDataModal';
-import CompanyDataModal from '../components/company/companyDataModal';
-import AddressDataModal from '../components/address/addressDataModal';
-
-import AddressEditModal from '../components/address/addressEditModal';
-
 
 export default function MainPage() {
 
@@ -47,24 +41,6 @@ export default function MainPage() {
     setOpen(true);
   };
 
-  const EditModal = (id) => {
-
-    console.log('editModal id:');
-
-    console.log(id)
-
-    switch(eventKey) {
-      case 'user':
-        return <AddressEditModal/>
-      case 'address':
-        // return <AddressDataTable items={items[1]} deleteRow={deleteRow} editRow={editRow}/>
-      case 'company':
-        // return <CompanyDataTable items={items[1]} deleteRow={deleteRow} editRow={editRow}/>
-    }
-    return '';
-
-  }
-
   const getItems = (eventKey) => {
 
     setEventKey(eventKey)
@@ -83,11 +59,11 @@ export default function MainPage() {
   const RenderTable = () => {
     switch(eventKey) {
       case 'user':
-        return <UserDataTable items={items[1]} deleteRow={deleteRow} editRow={EditModal}/>
+        return <UserDataTable items={items[1]} deleteRow={deleteRow}/>
       case 'address':
-        return <AddressDataTable items={items[1]} deleteRow={deleteRow} editRow={EditModal}/>
+        return <AddressDataTable items={items[1]} deleteRow={deleteRow}/>
       case 'company':
-        return <CompanyDataTable items={items[1]} deleteRow={deleteRow} editRow={EditModal}/>
+        return <CompanyDataTable items={items[1]} deleteRow={deleteRow}/>
     }
     return '';
   }
@@ -98,8 +74,6 @@ export default function MainPage() {
       <Header eventKey={eventKey} onSelect={getItems}/>
 
       <RenderTable />
-      
-      <EditModal/>
 
     </div>
   );
