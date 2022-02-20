@@ -1,20 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import api from '../services/api';
+import 'rsuite/dist/rsuite.min.css'
 
 import { Table, Column, HeaderCell, Cell } from 'rsuite-table';
 import { Modal, Form, Notification, Button, ButtonGroup, Navbar, Nav,} from 'rsuite';
 
-import 'rsuite/dist/rsuite.min.css'
+import Header from '../components/header';
+import DataTable from '../components/dataTable';
 
 export default function MainPage() {
 
   const [items, setItems] = useState([]);
 
-  const getItems = async (link) =>{
+  const deleteRow = (eventKey, rowData) => {
 
-    api.get(`api/${link}`,{}).then(response => {
+    api.delete(`api/${eventKey}/delete/${rowData.id}`,{}).then(response => {
 
-      setItems([items, response.data.data]);
+      getItems();
+      
+    }).catch(err => {
+    
+      alert(err)
+    
+    });
+  }
+
+  const getItems = (eventKey) =>{
+
+    api.get(`api/${eventKey}`,{}).then(response => {
+
+      console.log(response)
+
+      setItems([items, response]);
 
     }).catch(err => {
 
@@ -23,44 +40,22 @@ export default function MainPage() {
     });
   }
 
-  const [open, setOpen] = React.useState(false);
-  const [backdrop, setBackdrop] = React.useState('static');
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpen = () => {
 
+  }
 
-  const activeKey = '';
-
-  const onSelect = (eventKey) => {
-    getItems('user')
-  };
-
-  function RenderTable() {
-    if(items) {
-      return <Table data={items}/>
-    }
+  const RenderTable = () => {
+    return <DataTable items={{items}}/>
   }
 
   return (
-    <div className="users-container">
+    <div className="page-container">
 
-      {/* <Navbar onSelect={onSelect} activeKey={activeKey}> */}
-      <Navbar>
+      <Header onSelect={getItems} handleOpen={handleOpen}/>
 
-        <Navbar.Brand href="#">
-          React + laravel basic crud
-        </Navbar.Brand>
-        <Nav>
-          <Nav.Item onSelect={onSelect} eventKey="user">Users</Nav.Item>
-          <Nav.Item eventKey="companies" >Companies</Nav.Item>
-          <Nav.Item eventKey="addresses" >Addresses</Nav.Item>
-        </Nav>
-        <Nav pullRight>
-            <Nav.Item onClick={handleOpen}> 
-              new 
-            </Nav.Item>
-          </Nav>
-      </Navbar>
+      {/* <Table data={items}/> */}
+
+      <RenderTable/>
     
     </div>
   );
