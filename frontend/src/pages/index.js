@@ -2,84 +2,67 @@ import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 
 import { Table, Column, HeaderCell, Cell } from 'rsuite-table';
+import { Modal, Form, Notification, Button, ButtonGroup, Navbar, Nav,} from 'rsuite';
 
-// import 'rsuite-table/lib/less/index.less';
+import 'rsuite/dist/rsuite.min.css'
 
-import 'rsuite/styles/index.less'; // or 'rsuite/dist/rsuite.min.css'
+export default function MainPage() {
 
-export default function UsersPage() {
+  const [items, setItems] = useState([]);
 
-  const [userList, setUsersList] = useState([]);
-  
-  useEffect(() => {
-    
-    api.get('api/user',{}).then(response => {
+  const getItems = async (link) =>{
 
-      console.log('Response:')
-      console.log(response);
+    api.get(`api/${link}`,{}).then(response => {
 
-      setUsersList([userList, response.data.data]);
+      setItems([items, response.data.data]);
 
     }).catch(err => {
 
       alert(err)
 
     });
+  }
 
-  }, []);
+  const [open, setOpen] = React.useState(false);
+  const [backdrop, setBackdrop] = React.useState('static');
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
 
-  console.log(userList);
+  const activeKey = '';
 
+  const onSelect = (eventKey) => {
+    getItems('user')
+  };
+
+  function RenderTable() {
+    if(items) {
+      return <Table data={items}/>
+    }
+  }
 
   return (
     <div className="users-container">
 
-      <Table data={userList[1]} 
-        height={400}
-        onRowClick={data => {
-          console.log(data);
-        }
-      }>
+      {/* <Navbar onSelect={onSelect} activeKey={activeKey}> */}
+      <Navbar>
 
-        <Column width={10} align="center" fixed>
-          <HeaderCell>ID</HeaderCell>
-          <Cell dataKey="id" />
-        </Column>
-
-        <Column width={40} align="center" sortable>
-          <HeaderCell>Name</HeaderCell>
-          <Cell dataKey="name" />
-        </Column>
-
-        <Column width={40} align="center" sortable>
-          <HeaderCell>Email</HeaderCell>
-          <Cell dataKey="email" />
-        </Column>
-
-        <Column width={40} align="center" sortable>
-          <HeaderCell>City</HeaderCell>
-          <Cell dataKey="city" />
-        </Column>
-
-        <Column width={120} fixed="right">
-        <HeaderCell>Action</HeaderCell>
-
-        <Cell>
-          {rowData => {
-            function handleAction() {
-              alert(`id:${rowData.id}`);
-            }
-            return (
-              <span>
-                <a onClick={handleAction}> Edit </a> | <a onClick={handleAction}> Remove </a>
-              </span>
-            );
-          }}
-        </Cell>
-      </Column>
-
-      </Table>
+        <Navbar.Brand href="#">
+          React + laravel basic crud
+        </Navbar.Brand>
+        <Nav>
+          <Nav.Item onSelect={onSelect} eventKey="user">Users</Nav.Item>
+          <Nav.Item eventKey="companies" >Companies</Nav.Item>
+          <Nav.Item eventKey="addresses" >Addresses</Nav.Item>
+        </Nav>
+        <Nav pullRight>
+            <Nav.Item onClick={handleOpen}> 
+              new 
+            </Nav.Item>
+          </Nav>
+      </Navbar>
+    
     </div>
   );
+  
 }
