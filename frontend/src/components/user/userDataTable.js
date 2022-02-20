@@ -33,6 +33,11 @@ export default function UserDataTable(props) {
           <Cell dataKey="email" />
         </Column>
 
+        <Column width={200} align="center" sortable>
+          <HeaderCell>Phone</HeaderCell>
+          <Cell dataKey="phone" />
+        </Column>
+
         <Column width={300} align="center" sortable>
           <HeaderCell>City</HeaderCell>
           <Cell dataKey="city" />

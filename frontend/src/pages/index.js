@@ -3,13 +3,15 @@ import api from '../services/api';
 import 'rsuite/dist/rsuite.min.css'
 
 import { Table, Column, HeaderCell, Cell } from 'rsuite-table';
-import { Modal, Form, Notification, Button, ButtonGroup, Navbar, Nav,} from 'rsuite';
+import { Modal, Form, Notification, Button, ButtonGroup, Navbar, Nav, } from 'rsuite';
+
+import { Container, Content, Footer, Sidebar } from 'rsuite';
 
 import Header from '../components/header';
+
 import UserDataTable from '../components/user/userDataTable';
 import AddressDataTable from '../components/address/addressDataTable';
 import CompanyDataTable from '../components/company/companyDataTable';
-
 
 export default function MainPage() {
 
@@ -23,14 +25,14 @@ export default function MainPage() {
     console.log(eventKey)
 
 
-    api.delete(`api/${eventKey}/delete/${id}`,{}).then(response => {
+    api.delete(`api/${eventKey}/delete/${id}`, {}).then(response => {
 
       getItems(eventKey);
-      
+
     }).catch(err => {
-      
+
       alert(err)
-      
+
     });
   }
 
@@ -38,7 +40,7 @@ export default function MainPage() {
 
     setEventKey(eventKey)
 
-    api.get(`api/${eventKey}`,{}).then(response => {
+    api.get(`api/${eventKey}`, {}).then(response => {
 
       setItems([items, response.data.data]);
 
@@ -50,31 +52,32 @@ export default function MainPage() {
   }
 
   const RenderTable = () => {
-    switch(eventKey){
+    switch(eventKey) {
       case 'user':
-        return <UserDataTable items={items[1]} deleteRow={deleteRow}/>
+        return <Content align="center">
+                <UserDataTable items={items[1]} deleteRow={deleteRow}/>
+              </Content>
       case 'address':
-        return <AddressDataTable items={items[1]} deleteRow={deleteRow}/>
+        return <AddressDataTable items={items[1]} deleteRow={deleteRow} />
       case 'company':
-        return <CompanyDataTable items={items[1]} deleteRow={deleteRow}/>
+        return <CompanyDataTable items={items[1]} deleteRow={deleteRow} />
     }
     return '';
   }
 
   const handleOpen = () => {
-
+    return ''
   }
 
   return (
     <div className="page-container">
 
-      <Header onSelect={getItems} handleOpen={handleOpen}/>
+      <Header eventKey={eventKey} onSelect={getItems}/>
 
-      {/* <Table data={items}/> */}
+      <RenderTable />
+      
 
-      <RenderTable/>
-    
     </div>
   );
-  
+
 }
