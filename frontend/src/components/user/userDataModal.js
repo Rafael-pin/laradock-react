@@ -16,8 +16,6 @@ export default function UserDataModal(props) {
   const handleCreate = () => {
     setOpen(false);
 
-    console.log(formValue)
-
     api.post(`api/user/new`, formValue).then(response => {
 
       alert('success');
