@@ -6,16 +6,16 @@ import { Modal, Form, Notification, Button, ButtonGroup, Navbar, Nav,} from 'rsu
 
 import 'rsuite/dist/rsuite.min.css'
 
-export default function DataTable(props) {
 
-  console.log('porps.items:')
-  console.log(props.items[1])
+export default function DataTable(props) {
+  
+  // console.log(props.items)
 
   return (
     <div className="table-container">
-      <Table data={props.items[1]} height={500} onRowClick={data => { console.log(data); }}>
-
-        <Column width={100} align="center">
+      <Table data={props.items ? props.items : []} height={500} onRowClick={data => { console.log(data); }}>
+       
+        <Column width={0} align="center">
           <HeaderCell>ID</HeaderCell>
           <Cell dataKey="id" />
         </Column>
@@ -39,25 +39,19 @@ export default function DataTable(props) {
           <HeaderCell>Action</HeaderCell>
           <Cell>
             {rowData => {
-            //   function deleteRow() {
+              function deleteRow() {
 
-            //     // api.delete(`api/${link}/delete/${rowData.id}`,{}).then(response => {
-          
-            //     //   getUsers();
-                  
-            //     // }).catch(err => {
-                
-            //     //   alert(err)
-                
-            //     // });
-            // }
-            function editRow(action) {
+                props.deleteRow(rowData.id)
+
+            }
+            function editRow() {
               alert(`edit id:${rowData.id}`);
+              
             }
             return (
               <ButtonGroup>
                 <Button color="blue" appearance="subtle" onClick={editRow}> Edit </Button> 
-                {/* <Button color="red" appearance="subtle" onClick={deleteRow}> Remove </Button>  */}
+                <Button color="red" appearance="subtle" onClick={deleteRow}> Remove </Button> 
               </ButtonGroup>
            );
           }}              

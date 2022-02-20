@@ -11,26 +11,31 @@ import DataTable from '../components/dataTable';
 export default function MainPage() {
 
   const [items, setItems] = useState([]);
+  const [eventKey, setEventKey] = useState('');
 
-  const deleteRow = (eventKey, rowData) => {
+  const deleteRow = (id) => {
 
-    api.delete(`api/${eventKey}/delete/${rowData.id}`,{}).then(response => {
+    console.log('id')
+    console.log(id)
+    console.log(eventKey)
 
-      getItems();
+
+    api.delete(`api/${eventKey}/delete/${id}`,{}).then(response => {
+
+      getItems(eventKey);
       
     }).catch(err => {
-    
+      
       alert(err)
-    
+      
     });
   }
 
-  const getItems = (eventKey) =>{
+  const getItems = (eventKey) => {
+
+    setEventKey(eventKey)
 
     api.get(`api/${eventKey}`,{}).then(response => {
-
-      console.log('repsonse:')
-      console.log(response)
 
       setItems([items, response.data.data]);
 
@@ -41,12 +46,12 @@ export default function MainPage() {
     });
   }
 
-  const handleOpen = () => {
-
+  const RenderTable = () => {
+    return <DataTable items={items[1]} deleteRow={deleteRow}/>
   }
 
-  const RenderTable = () => {
-    return <DataTable items={items}/>
+  const handleOpen = () => {
+
   }
 
   return (
