@@ -1,11 +1,6 @@
-import React, { useState, useEffect } from 'react';
-
-
-import api from '../services/api';
-
+import React from 'react';
 import Navbar from 'rsuite/Navbar';
 import Nav from 'rsuite/Nav';
-
 import UserDataModal from '../components/user/userDataModal';
 import CompanyDataModal from '../components/company/companyDataModal';
 import AddressDataModal from '../components/address/addressDataModal';

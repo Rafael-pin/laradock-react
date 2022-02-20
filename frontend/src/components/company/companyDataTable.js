@@ -43,7 +43,7 @@ export default function CompanyDataTable(props) {
 
             }
             function editRow() {
-              alert(`edit id:${rowData.id}`);
+              // alert(`edit id:${rowData.id}`);
               
             }
             return (

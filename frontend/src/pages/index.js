@@ -1,24 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 import 'rsuite/dist/rsuite.min.css'
-
-import { Table, Column, HeaderCell, Cell } from 'rsuite-table';
-import { Modal, Form, Notification, Button, ButtonGroup, Navbar, Nav, } from 'rsuite';
-
-import { Container, Content, Footer, Sidebar } from 'rsuite';
-
 import Header from '../components/header';
-
 import UserDataTable from '../components/user/userDataTable';
 import AddressDataTable from '../components/address/addressDataTable';
 import CompanyDataTable from '../components/company/companyDataTable';
 
+import AddressEditModal from '../components/address/addressEditModal';
+
 
 export default function MainPage() {
-
+  const [open, setOpen] = React.useState(false);
   const [items, setItems] = useState([]);
   const [eventKey, setEventKey] = useState('');
-  const [open, setOpen] = React.useState(false);
 
   const deleteRow = (id) => {
 
@@ -33,13 +27,15 @@ export default function MainPage() {
     });
   }
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   const handleOpen = () => {
     setOpen(true);
   };
+
+  const editRow = (dataRow) => {
+    
+  
+    return <AddressEditModal onClick={handleOpen}/>
+  }
 
   const getItems = (eventKey) => {
 
@@ -59,11 +55,11 @@ export default function MainPage() {
   const RenderTable = () => {
     switch(eventKey) {
       case 'user':
-        return <UserDataTable items={items[1]} deleteRow={deleteRow}/>
+        return <UserDataTable items={items[1]} deleteRow={deleteRow} editRow={editRow}/>
       case 'address':
-        return <AddressDataTable items={items[1]} deleteRow={deleteRow}/>
+        return <AddressDataTable items={items[1]} deleteRow={deleteRow} editRow={editRow}/>
       case 'company':
-        return <CompanyDataTable items={items[1]} deleteRow={deleteRow}/>
+        return <CompanyDataTable items={items[1]} deleteRow={deleteRow} editRow={editRow}/>
     }
     return '';
   }

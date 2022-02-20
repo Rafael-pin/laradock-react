@@ -58,7 +58,7 @@ export default function UserDataTable(props) {
 
             }
             function editRow() {
-              alert(`edit id:${rowData.id}`);
+              // alert(`edit id:${rowData.id}`);
               
             }
             return (
