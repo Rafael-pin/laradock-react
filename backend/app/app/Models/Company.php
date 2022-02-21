@@ -42,12 +42,12 @@ class Company extends Model
 
     public function users()
     {
-        return $this->hasMany(Users::class);
+        return $this->hasMany(User::class, 'id', 'id');
     }
 
     public function address()
     {
-        return $this->hasOne(Users::class);
+        return $this->hasOne(User::class);
     }
 
 }

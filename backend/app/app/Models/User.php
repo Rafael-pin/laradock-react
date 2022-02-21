@@ -49,8 +49,8 @@ class User extends Model
         return $this->all();
     }
 
-    public function company()
-    {
-        return $this->belongsTo(Company::class);
-    }
+   public function company()
+   {
+       return $this->belongsTo(Company::class, 'id', 'id');
+   }
 }

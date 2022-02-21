@@ -32,8 +32,11 @@ class CompanyController extends Controller
             throw new \Exception('Not found', -404);
         }
 
-        return $company;
-
+        return [
+            'company' => $company, 
+            'users' => $company->users()->get(), 
+            'address' => $company->address()->get()
+        ];
     }
 
     public function update(Request $request)

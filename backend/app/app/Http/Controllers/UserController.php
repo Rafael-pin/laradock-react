@@ -26,16 +26,16 @@ class UserController extends Controller
 
     public function get(Request $request)
     {
-        try { 
+        $user = User::findOrFail($request->route('id'));
 
-            $user = User::findOrFail($request->route('id'));
-
-        } catch(\Throwable $e) {
-
-            return ResponseService::exception('UserController.get',$request->route('id'),$e);
+        if (!$user) {
+            throw new \Exception('Not found', -404);
         }
 
-        return $user;
+        return [
+            'user' => $user, 
+            'company' => $user->company()->get()
+        ];
     }
 
     public function update(Request $request)

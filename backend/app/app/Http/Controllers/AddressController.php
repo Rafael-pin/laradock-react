@@ -19,13 +19,10 @@ class AddressController extends Controller
 
     public function get(Request $request)
     {
-        try { 
+        $address = Address::findOrFail($request->route('id'));
 
-            $address = Address::findOrFail($request->route('id'));
-
-        } catch(\Throwable $e) {
-
-            return ResponseService::exception('AddressController.get',$request->route('id'),$e);
+        if (!$address) {
+            throw new \Exception('Not found', -404);
         }
 
         return $address;
